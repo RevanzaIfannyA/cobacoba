@@ -1092,52 +1092,9 @@ def page_experience():
 # HALAMAN: KONTAK
 # ─────────────────────────────────────────────
 def page_contact():
-    import requests
-    st.markdown('<div class="section-header"><p class="section-title">📬 Hubungi <span>Saya</span></p><p class="section-subtitle">Ada proyek menarik? Mari ngobrol!</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header"><p class="section-title">📬 Hubungi <span>Saya</span></p><p class="section-subtitle">Terhubung dengan saya melalui berbagai platform berikut</p></div>', unsafe_allow_html=True)
 
-    col_form, col_info = st.columns([3, 2])
-
-    with col_form:
-        with st.form("contact_form"):
-            st.markdown("#### ✉️ Kirim Pesan")
-            name = st.text_input("Nama Lengkap", placeholder="Contoh: Budi Santoso")
-            email = st.text_input("Alamat Email", placeholder="budi@email.com")
-            subject = st.selectbox("Topik", [
-                "Kolaborasi Proyek",
-                "Penawaran Freelance",
-                "Peluang Full-time",
-                "Pertanyaan Teknis",
-                "Lainnya",
-            ])
-            message = st.text_area("Pesan", placeholder="Ceritakan detail proyek atau pertanyaan Anda...", height=150)
-            submitted = st.form_submit_button("🚀 Kirim Pesan", use_container_width=True)
-
-            if submitted:
-                if name and email and message:
-                    # Kirim ke FormSubmit
-                    webhook_url = "https://formsubmit.co/ajax/primaazhari16@gmail.com"  # Ganti dengan email Anda
-                    
-                    data = {
-                        "name": name,
-                        "email": email,
-                        "subject": subject,
-                        "message": message,
-                        "_subject": f"[Portfolio] {subject} dari {name}",
-                        "_captcha": "false",  # Nonaktifkan captcha (opsional)
-                        "_template": "table",  # Template email yang rapi
-                    }
-                    
-                    try:
-                        response = requests.post(webhook_url, data=data)
-                        if response.status_code == 200:
-                            st.success(f"✅ Terima kasih, **{name}**! Pesan Anda telah terkirim. Saya akan merespon dalam 1x24 jam.")
-                            st.balloons()
-                        else:
-                            st.error("❌ Gagal mengirim pesan. Silakan coba lagi nanti.")
-                    except Exception as e:
-                        st.error(f"❌ Terjadi kesalahan: {str(e)}")
-                else:
-                    st.warning("⚠️ Mohon lengkapi semua field yang wajib diisi.")
+    col_info, col_social = st.columns([2, 2])
 
     with col_info:
         st.markdown("""
@@ -1148,33 +1105,80 @@ def page_contact():
             <p style="font-size: 0.875rem; margin-bottom: 0.5rem;">📍 Surabaya, Jawa Timur, Indonesia</p>
             <p style="font-size: 0.875rem; margin-bottom: 1.5rem;">⏰ Responsif dalam 24 jam</p>
             <hr style="margin: 1rem 0;">
-            <p style="font-weight: 700; font-size: 0.9rem; margin-bottom: 0.75rem;">🌐 Media Sosial</p>
+            <p style="font-weight: 700; font-size: 0.9rem; margin-bottom: 0.75rem;">🕒 Jam Aktif</p>
+            <p style="font-size: 0.875rem; margin-bottom: 0.25rem;">Senin - Jumat: 09:00 - 18:00 WIB</p>
+            <p style="font-size: 0.875rem; margin-bottom: 0.5rem;">Sabtu - Minggu: Terbatas (respond via email)</p>
+            <hr style="margin: 1rem 0;">
+            <p style="font-weight: 700; font-size: 0.9rem; margin-bottom: 0.75rem;">💡 Layanan yang Tersedia</p>
+            <p style="font-size: 0.875rem; margin-bottom: 0.25rem;">✓ Konsultasi Arsitektur Data</p>
+            <p style="font-size: 0.875rem; margin-bottom: 0.25rem;">✓ Pengembangan Model ML / AI</p>
+            <p style="font-size: 0.875rem; margin-bottom: 0.25rem;">✓ MLOps & Deployment</p>
+            <p style="font-size: 0.875rem; margin-bottom: 0.5rem;">✓ Training & Mentoring Tim Data</p>
         </div>
         """, unsafe_allow_html=True)
 
-        socials = [
-            ("💼 LinkedIn", "#", "linkedin"),
-            ("🐙 GitHub", "#", "github"),
-            ("🐦 Twitter / X", "#", "twitter"),
-            ("📝 Medium Blog", "#", "medium"),
-            ("🎥 YouTube", "#", "youtube"),
-        ]
-        links_html = "".join(
-            f'<a href="{url}" class="social-link" target="_blank">{label}</a>'
-            for label, url, _ in socials
-        )
-        st.markdown(f'<div style="display:flex; flex-wrap:wrap; gap:0.5rem;">{links_html}</div>', unsafe_allow_html=True)
-
-        st.markdown("<br>", unsafe_allow_html=True)
+    with col_social:
         st.markdown("""
-        <div class="stat-box" style="margin-top: 1rem;">
-            <span class="stat-number">🟢</span>
-            <span class="stat-label">Open to Opportunities</span>
-            <p style="font-size: 0.8rem; color: #8B949E; margin-top: 0.5rem;">
-                Freelance · Remote · Full-time
-            </p>
+        <div class="about-card">
+            <p style="font-weight: 700; font-size: 1rem; margin-bottom: 1rem;">🌐 Media Sosial & Portofolio</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
+                <a href="https://linkedin.com/in/alexrivera" class="social-link" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem;">💼 LinkedIn</a>
+                <a href="https://github.com/alexrivera" class="social-link" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem;">🐙 GitHub</a>
+                <a href="https://twitter.com/alexrivera" class="social-link" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem;">🐦 Twitter</a>
+                <a href="https://medium.com/@alexrivera" class="social-link" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem;">📝 Medium</a>
+                <a href="https://youtube.com/@alexrivera" class="social-link" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem;">🎥 YouTube</a>
+                <a href="https://instagram.com/alexrivera" class="social-link" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem;">📸 Instagram</a>
+                <a href="https://kaggle.com/alexrivera" class="social-link" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem;">🎓 Kaggle</a>
+            </div>
         </div>
         """, unsafe_allow_html=True)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div class="about-card">
+            <p style="font-weight: 700; font-size: 0.9rem; margin-bottom: 0.75rem;">📄 CV & Portofolio</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                <a href="#" class="social-link" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem;">📥 Download CV (PDF)</a>
+                <a href="#" class="social-link" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem;">📂 Portofolio Lengkap</a>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Tambahan: Testimonial atau Clients Section
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown('<div class="section-header"><p class="section-title">💬 Testimoni <span>Klien</span></p><p class="section-subtitle">Apa kata mereka tentang kolaborasi dengan saya</p></div>', unsafe_allow_html=True)
+    
+    testimonial_cols = st.columns(3)
+    testimonials = [
+        {"text": "Alex berhasil meningkatkan akurasi model churn prediction kami hingga 30%. Luar biasa!", "author": "Product Manager, TechCorp", "emoji": "⭐"},
+        {"text": "Kolaborasi dengan Alex sangat profesional. Pipeline data jadi lebih efisien dan reliable.", "author": "CTO, StartupX", "emoji": "🚀"},
+        {"text": "Dedikasi dan keahlian Alex di bidang MLOps benar-benar mengubah alur kerja tim kami.", "author": "Lead Engineer, DataLabs", "emoji": "🤝"},
+    ]
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="stat-box">
+        <span class="stat-number">🟢</span>
+        <span class="stat-label">Open to Opportunities</span>
+        <p style="font-size: 0.8rem; color: #8B949E; margin-top: 0.75rem;">
+            Freelance · Remote · Full-time<br>
+            <span style="font-size: 0.75rem;">Tersedia untuk kolaborasi mulai Jan 2025</span>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    for idx, (col, testi) in enumerate(zip(testimonial_cols, testimonials)):
+        with col:
+            st.markdown(f"""
+            <div class="project-card" style="padding: 1.25rem; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">{testi['emoji']}</div>
+                <p style="color: #B4BAC0; font-size: 0.85rem; font-style: italic; line-height: 1.5;">"{testi['text']}"</p>
+                <p style="color: #7C3AED; font-size: 0.8rem; font-weight: 600; margin-top: 0.75rem;">— {testi['author']}</p>
+            </div>
+            """, unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────
