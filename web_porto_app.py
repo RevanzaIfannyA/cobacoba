@@ -1092,6 +1092,7 @@ def page_experience():
 # HALAMAN: KONTAK
 # ─────────────────────────────────────────────
 def page_contact():
+    import requests
     st.markdown('<div class="section-header"><p class="section-title">📬 Hubungi <span>Saya</span></p><p class="section-subtitle">Ada proyek menarik? Mari ngobrol!</p></div>', unsafe_allow_html=True)
 
     col_form, col_info = st.columns([3, 2])
@@ -1113,8 +1114,28 @@ def page_contact():
 
             if submitted:
                 if name and email and message:
-                    st.success(f"✅ Terima kasih, **{name}**! Pesan Anda telah diterima. *(Ini simulasi — pesan tidak benar-benar terkirim)*")
-                    st.balloons()
+                    # Kirim ke FormSubmit
+                    webhook_url = "https://formsubmit.co/ajax/primaazhari16@gmail.com"  # Ganti dengan email Anda
+                    
+                    data = {
+                        "name": name,
+                        "email": email,
+                        "subject": subject,
+                        "message": message,
+                        "_subject": f"[Portfolio] {subject} dari {name}",
+                        "_captcha": "false",  # Nonaktifkan captcha (opsional)
+                        "_template": "table",  # Template email yang rapi
+                    }
+                    
+                    try:
+                        response = requests.post(webhook_url, data=data)
+                        if response.status_code == 200:
+                            st.success(f"✅ Terima kasih, **{name}**! Pesan Anda telah terkirim. Saya akan merespon dalam 1x24 jam.")
+                            st.balloons()
+                        else:
+                            st.error("❌ Gagal mengirim pesan. Silakan coba lagi nanti.")
+                    except Exception as e:
+                        st.error(f"❌ Terjadi kesalahan: {str(e)}")
                 else:
                     st.warning("⚠️ Mohon lengkapi semua field yang wajib diisi.")
 
